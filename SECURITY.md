@@ -1,3 +1,7 @@
+## Important Security Note ##
+
+The VPN example protocol used in this sample is designed to be easily understood in the context of writing a VPN client. When you create a VPN client, you should use a properly secure protocol with modern encryption and modern authentication of users. The VPN Server code is similar: it's designed so that debugging the VPN connection and packets is easy. 
+
 <!-- BEGIN MICROSOFT SECURITY.MD V0.0.5 BLOCK -->
 
 ## Security

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SimpleVpnServer": {
+      "commandName": "Project",
+      "commandLineArgs": "/Start /Port 444 /Forward /PacketCounter"
+    }
+  }
+}

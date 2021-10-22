@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" IgnorableNamespaces="uap mp rescap">
+  <mp:PhoneIdentity PhoneProductId="05777116-8530-42a2-914d-9dae4b4da01a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.21329.0" MaxVersionTested="10.0.21329.0" />
+  </Dependencies>
+  <Identity Name="TestVpnPluginApp-SL" Publisher="CN=TestingCertForDebugging" Version="1.0.24.0" />
+  <Properties>
+    <DisplayName>TestVpnPluginApp-SL</DisplayName>
+    <PublisherDisplayName>VPNDHCP</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Resources>
+    <Resource Language="en-us" />
+  </Resources>
+  <!--
+    Notice how the foreground app and the background app are in two separate applications, this is vital to keep them running in two separate processes, so if one 
+    is closed, it won't terminate the other.
+  -->
+  <Applications>
+    <Application Id="App" Executable="TestVpnPluginApp.exe" EntryPoint="TestVpnPluginApp.App">
+      <uap:VisualElements DisplayName="TestVpnPluginApp-Cs" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo-44.png" BackgroundColor="#464646" Description="TestVpnPluginApp">
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:DefaultTile Square71x71Logo="Assets\SmallTile.png" Wide310x150Logo="Assets\WideTile.png" Square310x310Logo="Assets\LargeTile.png"/>
+      </uap:VisualElements>
+    </Application>
+    <Application Id="Plugin">
+      <uap:VisualElements DisplayName="TestVpnPluginApp-Cs" Square150x150Logo="Assets\Logo.png" Square44x44Logo="Assets\SmallLogo-44.png" Description="TestVpnPluginApp" BackgroundColor="#464646" AppListEntry="none">
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:DefaultTile/>
+      </uap:VisualElements>
+      <!-- 
+        This background task is required for VPN plug-in applications as it will be invoked by the platform whenever the plug-in
+        needs to perform work (i.e. connect, encapsulate, etc)
+        -->
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" Executable="TestVpnPluginApp.exe" EntryPoint="TestVpnPluginAppBg.VpnBackgroundTask">
+          <BackgroundTasks>
+            <uap:Task Type="vpnClient" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClientServer" />
+    <Capability Name="privateNetworkClientServer" />
+    <uap:Capability Name="sharedUserCertificates" />
+    <rescap:Capability Name="networkingVpnProvider"/>
+  </Capabilities>
+  <Extensions>
+    <Extension Category="windows.activatableClass.inProcessServer">
+      <InProcessServer>
+        <Path>CLRHost.dll</Path>
+        <ActivatableClass ActivatableClassId="TestVpnPluginAppBg.VpnBackgroundTask" ThreadingModel="both" />
+      </InProcessServer>
+    </Extension>
+  </Extensions>
+</Package>

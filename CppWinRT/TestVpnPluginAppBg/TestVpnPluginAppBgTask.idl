@@ -1,0 +1,14 @@
+namespace TestVpnPluginAppBg
+{
+    [default_interface]
+    runtimeclass TestVpnPluginAppBgTask : Windows.ApplicationModel.Background.IBackgroundTask
+    {
+        TestVpnPluginAppBgTask();
+    }
+
+    [default_interface]
+    runtimeclass VpnPlugInImpl : Windows.Networking.Vpn.IVpnPlugIn
+    {
+        VpnPlugInImpl();
+    }
+}

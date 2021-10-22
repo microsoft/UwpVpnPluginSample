@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleUDPListener", "SimpleUDPListener\SimpleUDPListener.csproj", "{3B5B11A4-198F-4226-A21A-6630E566DB27}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B5B11A4-198F-4226-A21A-6630E566DB27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B5B11A4-198F-4226-A21A-6630E566DB27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B5B11A4-198F-4226-A21A-6630E566DB27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B5B11A4-198F-4226-A21A-6630E566DB27}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8865CAEB-3C12-4B81-A420-F2293F8DFF28}
+	EndGlobalSection
+EndGlobal

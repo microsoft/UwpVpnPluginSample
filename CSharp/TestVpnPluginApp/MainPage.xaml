@@ -1,0 +1,95 @@
+<Page
+    x:Name="pageRoot"
+    x:Class="TestVpnPluginApp.MainPage"
+    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TestVpnPluginApp"
+    xmlns:common="using:TestVpnPluginApp.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <!-- TODO: Delete this line if the key AppName is declared in App.xaml -->
+        <x:String x:Key="AppName">Vpn Test Plugin</x:String>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="0,0,10,0" />
+            <Setter Property="MinWidth" Value="100" />
+        </Style>
+    </Page.Resources>
+
+    <!--
+        This grid acts as a root panel for the page that defines two rows:
+        * Row 0 contains the back button and page title
+        * Row 1 contains the rest of the page layout
+    -->
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- page title -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" Style="{StaticResource HeaderTextBlockStyle}" Grid.Column="1"
+                  IsHitTestVisible="false" TextWrapping="NoWrap" VerticalAlignment="Bottom" Margin="0,0,30,40"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Create Profile" Click="CreateAppProfileOnClick"/>
+                    <Button x:Name="ConnectButton" Content="Connect" Click="ConnectOnClick" />
+                    <Button x:Name="DisconnectButton" Content="Disconnect" Click="DisconnectOnClick"/>
+                </StackPanel>
+                <TextBlock x:Name="Status" Text="Disconnected" TextWrapping="Wrap" FontSize="36" Margin="0 10"/>
+                <TextBlock x:Name="PacketCounter" TextWrapping="Wrap" Margin="0 0 0 50">
+                <Run>TotalPacketsSent: </Run>
+                <Run x:Name="TotalPacketsSent" />
+                <Run> TotalUDPSent: </Run>
+                <Run x:Name="TotalUDPSent" />
+                <Run> TotalControlSent: </Run>
+                <Run x:Name="TotalControlSent" />
+                <Run> TotalKeepAliveSent: </Run>
+                <Run x:Name="TotalKeepAliveSent" />
+                <Run> TotalBytesSent: </Run>
+                <Run x:Name="TotalBytesSent" />
+                <LineBreak />
+                <Run>TotalPacketsReceived: </Run>
+                <Run x:Name="TotalPacketsReceived" />
+                <Run> TotalControlReceived: </Run>
+                <Run x:Name="TotalControlReceived" />
+                <Run> TotalBytesReceived: </Run>
+                <Run x:Name="TotalBytesReceived" />
+                </TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0 0 50 0">
+                    <TextBox x:Name="udpIP" Text="192.168.21.200:55600" MaxWidth="450" HorizontalAlignment="Left"/>
+                    <Button Content="Send UDP packet" Click="SendUDPPacketOnClick"/>
+                </StackPanel>
+                <TextBlock x:Name="UDPResponse" Text="No Packet has been sent" TextWrapping="Wrap"/>
+                <StackPanel Orientation="Horizontal" Margin="0 0 50 0">
+                    <TextBox x:Name="udpStreamIP" Text="192.168.21.200:55600" MaxWidth="450" HorizontalAlignment="Left"/>
+                    <Button x:Name="streamButton" Content="Start UDP stream" Click="ToggleUDPStreamOnClick"/>
+                </StackPanel>
+                <TextBlock x:Name="UDPStreamResponse" Text="No Packet has been sent" TextWrapping="Wrap"/>
+            </StackPanel>
+            <ScrollViewer Grid.Row="1" Margin="0,20,0,0">
+                <TextBlock x:Name="Logging" TextWrapping="Wrap" IsTextSelectionEnabled="True" />
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
+</Page>
