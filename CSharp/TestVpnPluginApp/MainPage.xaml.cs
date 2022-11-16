@@ -27,11 +27,65 @@ namespace TestVpnPluginApp
     {
         private const string PROFILE_NAME = "Test VPN Plugin Autoprofile";
         private const string MAPPED_MEMORY_NAME = "PacketCounter";
+        private const string DEFAULT_PROFILE = @"<pluginschema>
+    <testactivateforeground>true</testactivateforeground>
+    <port>444</port>
+    <ipAddress>10.0.1.2</ipAddress>
+    <transport>tcp</transport>
+    <loglevel>high</loglevel>
+    <packetcapture>true</packetcapture>
+    <buffercapture>true</buffercapture>
+    <networksettings>
+        <routes>
+            <includev4>
+                <route>
+                    <address>192.168.21.0</address>
+                    <prefix>24</prefix>
+                </route>
+            </includev4>
+         </routes>
+    </networksettings>
+</pluginschema>";
+        private const string SUFFIX_PROFILE = @"<pluginschema>
+    <v2></v2>
+    <testactivateforeground>false</testactivateforeground>
+    <port>444</port>
+    <ipAddress>10.0.1.2</ipAddress>
+    <transport>tcp</transport>
+    <loglevel>high</loglevel>
+    <packetcapture>true</packetcapture>
+    <buffercapture>true</buffercapture>
+    <networksettings>
+        <routes>
+            <includev4>
+                <route>
+                    <address>192.168.21.0</address>
+                    <prefix>24</prefix>
+                </route>
+            </includev4>
+         </routes>
+        <namespaces>
+            <namespace>
+                <space>contoso.local</space>
+                <dnsservers>
+                    <server>192.168.200.3</server>
+                </dnsservers>
+            </namespace>
+            <namespace>
+                <space>fabrikan.local</space>
+                <dnsservers>
+                    <server>192.168.210.15</server>
+                </dnsservers>
+            </namespace>
+        </namespaces>
+    </networksettings>
+</pluginschema>";
         private  string packageName = Package.Current.Id.FamilyName;
 
         private VpnManagementAgent agent = new VpnManagementAgent();
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
         private System.Timers.Timer timer;
+        private String profileString = DEFAULT_PROFILE;
         /// <summary>
         /// This can be changed to a strongly typed view model.
         /// </summary>
@@ -140,28 +194,9 @@ namespace TestVpnPluginApp
             profile.RequireVpnClientAppUI = true;
             profile.ProfileName = PROFILE_NAME;
             profile.VpnPluginPackageFamilyName = packageName;
-            profile.CustomConfiguration =
-@"<pluginschema>
-    <testactivateforeground>true</testactivateforeground>
-    <port>444</port>
-    <ipAddress>10.0.1.2</ipAddress>
-    <transport>tcp</transport>
-    <loglevel>high</loglevel>
-    <packetcapture>true</packetcapture>
-    <buffercapture>true</buffercapture>
-    <networksettings>
-        <routes>
-            <includev4>
-                <route>
-                    <address>192.168.21.0</address>
-                    <prefix>24</prefix>
-                </route>
-            </includev4>
-         </routes>
-    </networksettings>
-</pluginschema>";
+            profile.CustomConfiguration = profileString;
 
-            profile.ServerUris.Add(new Uri("http://10.137.192.135"));
+            profile.ServerUris.Add(new Uri("http://10.38.7.111"));
             var returnedStatus = await agent.AddProfileFromObjectAsync(profile);
             if (returnedStatus == VpnManagementErrorStatus.Ok)
             {
@@ -177,6 +212,7 @@ namespace TestVpnPluginApp
         {
             await SendUDPPacket();
         }
+
         private async Task SendUDPPacket()
         {
             try
@@ -536,6 +572,21 @@ namespace TestVpnPluginApp
             {
                 Log($"ERROR: no such profile {PROFILE_NAME}");
             }
+        }
+
+        private async void ToggleSuffixesOnClick(object sender, RoutedEventArgs e)
+        {
+            if (profileString.Equals(DEFAULT_PROFILE))
+            {
+                profileString = SUFFIX_PROFILE;
+                ToggleSuffixesButton.Content = "DisableSuffixes";
+            }
+            else
+            {
+                profileString = DEFAULT_PROFILE;
+                ToggleSuffixesButton.Content = "EnableSuffixes";
+            }
+            DeleteExistingProfile(PROFILE_NAME); // Delete profile since we want to change settings
         }
     }
 }
