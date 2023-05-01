@@ -51,9 +51,9 @@
             </Grid.RowDefinitions>
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Create Profile" Click="CreateAppProfileOnClick"/>
-                    <Button x:Name="ConnectButton" Content="Connect" Click="ConnectOnClick" />
-                    <Button x:Name="DisconnectButton" Content="Disconnect" Click="DisconnectOnClick"/>
+                    <Button Content="Create Profile" Click="CreateAppProfileOnClick" AutomationProperties.AutomationId="VpnClientCreateProfile"/>
+                    <Button x:Name="ConnectButton" Content="Connect" Click="ConnectOnClick" AutomationProperties.AutomationId="VpnClientConnectProfile"/>
+                    <Button x:Name="DisconnectButton" Content="Disconnect" Click="DisconnectOnClick" AutomationProperties.AutomationId="VpnClientDisconnectProfile"/>
                 </StackPanel>
                 <TextBlock x:Name="Status" Text="Disconnected" TextWrapping="Wrap" FontSize="36" Margin="0 10"/>
                 <TextBlock x:Name="PacketCounter" TextWrapping="Wrap" Margin="0 0 0 50">

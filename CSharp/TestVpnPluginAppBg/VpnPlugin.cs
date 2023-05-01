@@ -223,6 +223,12 @@ namespace TestVpnPluginAppBg
                 // from the user.
                 //
 
+                VPN_AUTHENTICATION vPN_AUTHENTICATION = new VPN_AUTHENTICATION();
+                vPN_AUTHENTICATION.authType = VpnCredentialType.UsernamePassword;
+                vPN_AUTHENTICATION.expectedUser = "vpntest\\Vpn1";
+                vPN_AUTHENTICATION.expectedPass = "VpnDhcp254";
+                config.authentications.Add(vPN_AUTHENTICATION);
+
                 AttemptAuthentication(channel, config);
 
                 if (config.TestActivateForeground)

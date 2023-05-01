@@ -4,7 +4,7 @@
   <Dependencies>
     <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.21329.0" MaxVersionTested="10.0.21329.0" />
   </Dependencies>
-  <Identity Name="TestVpnPluginApp-SL" Publisher="CN=TestingCertForDebugging" Version="1.0.24.0" />
+  <Identity Name="TestVpnPluginApp-SL" Publisher="CN=veponnam" Version="1.0.32.0" />
   <Properties>
     <DisplayName>TestVpnPluginApp-SL</DisplayName>
     <PublisherDisplayName>VPNDHCP</PublisherDisplayName>

@@ -142,7 +142,7 @@ namespace TestVpnPluginApp
             profile.VpnPluginPackageFamilyName = packageName;
             profile.CustomConfiguration =
 @"<pluginschema>
-    <testactivateforeground>true</testactivateforeground>
+    <testactivateforeground>false</testactivateforeground>
     <port>444</port>
     <ipAddress>10.0.1.2</ipAddress>
     <transport>tcp</transport>
@@ -160,8 +160,9 @@ namespace TestVpnPluginApp
          </routes>
     </networksettings>
 </pluginschema>";
+            
 
-            profile.ServerUris.Add(new Uri("http://10.137.192.135"));
+            profile.ServerUris.Add(new Uri("http://10.38.7.111"));
             var returnedStatus = await agent.AddProfileFromObjectAsync(profile);
             if (returnedStatus == VpnManagementErrorStatus.Ok)
             {
