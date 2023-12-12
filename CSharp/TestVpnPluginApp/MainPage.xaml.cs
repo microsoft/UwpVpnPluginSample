@@ -162,7 +162,7 @@ namespace TestVpnPluginApp
 </pluginschema>";
             
 
-            profile.ServerUris.Add(new Uri("http://10.38.7.111"));
+            profile.ServerUris.Add(new Uri("http://10.137.193.224"));
             var returnedStatus = await agent.AddProfileFromObjectAsync(profile);
             if (returnedStatus == VpnManagementErrorStatus.Ok)
             {
